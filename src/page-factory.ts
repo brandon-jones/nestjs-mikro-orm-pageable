@@ -62,7 +62,8 @@ export class PageFactory<TEntity extends object, TOutput extends object = TEntit
             addFilter<TEntity>(queryBuilder, this.query);
         }
 
-        let totalItems = await queryBuilder.getCount();
+        const queryBuilderCount = queryBuilder.clone();
+        let totalItems = await queryBuilderCount.getCount();
 
         if (this.query.limit !== undefined) {
             queryBuilder.limit(this.query.limit);
